@@ -1,11 +1,10 @@
-import login from "./login"
-import signUp from "./signUp"
+// /** @format */
 
+// // import Login from "./Login";
+// import signUp from "./signUp";
 
-
-
-export default {
-    Login,
-    signUp
-
-}
+// export default {
+// 	index,
+// 	login,
+// 	signUp,
+// };
