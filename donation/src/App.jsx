@@ -1,21 +1,37 @@
-import { useState } from 'react'
+/** @format */
+
+import React from "react";
+// import ProtectedRoute from "./context/protectedRoute";
 import "./index.css";
-import SignUp from "./pages/signUp";
-import Login from "./pages/Login";
+import {
+	Login,
+	SignUp,
+	Home,
+	Donations,
+	History,
+	BreakDown,
+	MyDonations,
+} from "./pages";
+import { NavBar } from "./components";
 import Input from "./components/input";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
 	return (
-		
-			<div>
-				<Routes>
-					<Route path='/signup' element={<SignUp />} />
-					<Route path='/login' element={<Login />} />
-				</Routes>
-			</div>
-		
+		<div>
+			<Routes>
+				<Route path='/' element={<SignUp />} />
+				<Route path='/signup' element={<SignUp />} />
+				<Route path='/login' element={<Login />} />
+				<Route path='/navbar' element={<NavBar />} />
+				{/* <ProtectedRoute path='/home' element={<Home />} /> */}
+				{/* <ProtectedRoute path='/donations' element={<Donations />} />
+				<ProtectedRoute path='/history' element={<History />} />
+				<ProtectedRoute path='/breakdown' element={<BreakDown />} />
+				<ProtectedRoute path='/mydonations' element={<MyDonations />} /> */}
+			</Routes>
+		</div>
 	);
 }
 
-export default App
+export default App;
