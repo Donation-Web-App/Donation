@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 // import useAuth  from "../context/authProvider";
 
 //API URL
@@ -16,6 +16,9 @@ export const Login = () => {
 		email: "",
 		password: "",
 	});
+
+
+	//To show password
 	const [show, setShow] = useState(false);
 
 	//HOOKS
@@ -41,22 +44,20 @@ export const Login = () => {
 		try {
 			const response = await axios.post(`${API_BASE_URL}`, { ...value });
 
-			let token = response.data.token;
+			let token = response.data.data.token;
 
 			//LOG RESULT
 			console.log(response);
 			// console.log(response.data.data.user);
-			console.log(response.data.data.token);
+
+			console.log(token);
 
 			//DESTRUCTURE USER DATA
 			const { firstname, lastname, email, role } = response.data.data.user;
-			const data = { firstname, lastname, email, role };
-
+			const data = { firstname, lastname, email, role, token };
+			console.log(data);
 			//STORE TOKEN IN COOKIE
-			if (token) {
-				//store the received JWT in the client-side application
-			}
-			Cookies.set("jwt", response.data.token, { expires: 7 }); // Expires in 7 days
+			// Expires in 7 days
 			navigate("/home", { state: data });
 		} catch (error) {
 			console.log(error.response);

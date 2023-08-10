@@ -1,8 +1,9 @@
 /** @format */
 
 import React, { useState } from "react";
+import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
-import { useLocation } from "react-router-dom";
 import user from "../assets/user.png";
 import donationimg from "../assets/Donation-image.svg";
 
@@ -10,22 +11,43 @@ import HomeSideBar from "../components/homeSideBar";
 import DonationsSideBar from "../components/donationSideBar";
 import LogOut from "../components/logout";
 
+//AXIOS INTERCEPTOR
+
 export const Home = () => {
 	const location = useLocation();
 	const data = location.state;
-	const { firstname, lastname } = data;
+
+	const { firstname, lastname, token } = data;
+	
+
+	const navigate = useNavigate();
 
 	const [value, setValue] = useState({
 		amount: "",
 		date: "",
 	});
 
+	const finalData = { ...data, ...value };
+	console.log(finalData);
+
+	axios.interceptors.request.use(
+		(config) => {
+			console.log(token);
+			config.headers.authorization = `Bearer ${token}`;
+
+			return config;
+		},
+		(error) => {
+			return Promise.reject(error);
+		}
+	);
+
 	// LOGIC
 	const handleChange = (e) => {
 		setValue({ ...value, [e.target.name]: e.target.value });
 		// value.amount = parseInt(value.amount);
 	};
-	console.log(value);
+	// console.log(value);
 
 	const handleSubmit = async (e) => {
 		const url = "http://localhost:4040/api/v2/user/notify";
@@ -35,12 +57,18 @@ export const Home = () => {
 		e.preventDefault();
 		try {
 			const response = await axios.post(url, { ...value });
-			console.log(response);
-			console.log("sent");
+			if (response.status === 200 && value.amount !== "NaN") {
+				console.log(response);
+				console.log("sent");
+				navigate("/donations", { state: finalData});
+			}
+			{
+				// navigate("/home", { state: data });
+			}
 		} catch (error) {
-			console.log(error.response);
+			console.log(error);
 		}
-		console.log(value);
+		
 	};
 
 	return (

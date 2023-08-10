@@ -13,7 +13,7 @@ import {
 	MyDonations,
 } from "./pages";
 import { NavBar } from "./components";
-import Input from "./components/input";
+// import Input from "./components/input";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -24,11 +24,11 @@ function App() {
 				<Route path='/signup' element={<SignUp />} />
 				<Route path='/login' element={<Login />} />
 				<Route path='/navbar' element={<NavBar />} />
-				{/* <ProtectedRoute path='/home' element={<Home />} /> */}
-				{/* <ProtectedRoute path='/donations' element={<Donations />} />
-				<ProtectedRoute path='/history' element={<History />} />
-				<ProtectedRoute path='/breakdown' element={<BreakDown />} />
-				<ProtectedRoute path='/mydonations' element={<MyDonations />} /> */}
+				<Route path='/home' element={<Home />} />
+				 <Route path='/donations' element={<Donations />} />
+				<Route path='/history' element={<History />} />
+				<Route path='/breakdown' element={<BreakDown />} />
+				<Route path='/mydonations' element={<MyDonations />} />
 			</Routes>
 		</div>
 	);

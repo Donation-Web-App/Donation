@@ -1,11 +1,6 @@
 // /** @format */
 
 
-// export default {
-// 	index,
-// 	login,
-// 	signUp,
-// };
 
 export { Login } from "./login";
 export { SignUp } from "./signUp";
