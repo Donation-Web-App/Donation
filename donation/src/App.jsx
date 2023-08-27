@@ -14,11 +14,11 @@ import {
 } from "./pages";
 import { NavBar } from "./components";
 import Input from "./components/input";
-import { Route, Routes } from "react-router-dom";
+import { Router, Route, Routes } from "react-router-dom";
 
 function App() {
 	return (
-		<div>
+		<Router>
 			<Routes>
 				<Route path='/' element={<SignUp />} />
 				<Route path='/signup' element={<SignUp />} />
@@ -30,7 +30,7 @@ function App() {
 				<ProtectedRoute path='/breakdown' element={<BreakDown />} />
 				<ProtectedRoute path='/mydonations' element={<MyDonations />} /> */}
 			</Routes>
-		</div>
+		</Router>
 	);
 }
 

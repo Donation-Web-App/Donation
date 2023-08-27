@@ -9,10 +9,8 @@ const ApiBaseUrlContext = createContext('https://cacsaui.tech')
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
-		<Router>
-			<ApiBaseUrlContext.Provider>
-				<App />
-			</ApiBaseUrlContext.Provider>
-		</Router>
+		<ApiBaseUrlContext.Provider>
+			<App />
+		</ApiBaseUrlContext.Provider>
 	</React.StrictMode>
 );
