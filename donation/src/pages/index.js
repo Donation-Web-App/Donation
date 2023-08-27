@@ -7,10 +7,10 @@
 // 	signUp,
 // };
 
-export { Login } from "./login";
-export { SignUp } from "./signUp";
-export { Home } from "./home";
-export { Donations } from "./donations";
-export { History } from "./history";
-export { BreakDown } from "./breakdown";
-export { MyDonations } from "./mydonations";
+export { Login } from "./Login";
+export { SignUp } from "./SignUp";
+export { Home } from "./Home";
+export { Donations } from "./Donations";
+export { History } from "./History";
+export { BreakDown } from "./BreakDown";
+export { MyDonations } from "./MyDonations";
