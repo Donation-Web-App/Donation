@@ -1,20 +1,28 @@
-/** @format */
+import { useNavigate } from "react-router-dom";
+import { LogoutI } from "../assets";
 
-import React from "react";
-import { ReactComponent as LogOut } from "../assets/logout.svg";
-import { Link } from "react-router-dom";
+export function Logout () {
+	const navigate = useNavigate();
 
-const LogOutComp = () => {
+	function handleClick () {
+		const itemsToClear = ['firstName', 'userRole', 'tokenValue', 'tokenExpiration'];
+		
+		for (const item of itemsToClear) {
+			window.localStorage.setItem(item, '');
+		}
+
+		navigate('/login');
+	}
+
 	return (
-		<div>
-			<div className='flex items-center gap-2 absolute bottom-20'>
-				<LogOut />
-				<Link to='' className='font-[500]'>
-					Logout
-				</Link>
-			</div>
+		<div 
+			onClick={handleClick}
+			className='flex items-center gap-2 absolute bottom-20'
+		>
+			<LogoutI />
+			<span className='font-[500] cursor-pointer'>
+				Logout
+			</span>
 		</div>
 	);
 };
-
-export default LogOutComp;

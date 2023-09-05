@@ -12,3 +12,4 @@ export { DonorSelectInput } from "./DonorSelectInput";
 export { RecordDonationForm } from "./RecordDonationForm";
 export { Table } from "./Table";
 export { DonationsTable } from "./DonationsTable";
+export { Logout } from "./Logout";

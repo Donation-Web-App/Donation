@@ -32,7 +32,7 @@ export function ResetPassword () {
                     password,
                     confirmPassword
                 }
-            }redirect
+            }
             
             try {
                 const response = await axios.request(options);

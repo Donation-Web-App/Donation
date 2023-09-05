@@ -1,6 +1,7 @@
 import { HomeI, DonateI, Activity, HistoryI, Like  } from "../assets";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Logout } from "."
 
 export function NavBar () {
 	const [currentRoute, setCurrentRoute] = useState(window.location.pathname);
@@ -23,36 +24,39 @@ export function NavBar () {
 	const routes = userRole == "admin" ? adminRoutes : donorRoutes; 
 
 	return (
-		<div className='border-r h-full py-2.5 px-5'>
-			<div className="mb-10">
-				<h1 className="text-center text-xl font-bold text-primary">CACSA-UI</h1>
-			</div>
-			{routes.map((route => {
-				// Dark gray if the link's route is the current route 
-				const textColor = route.to === currentRoute ? 'text-gray-900': 'text-gray-400';
+		<div className='flex flex-col justify-between border-r h-full py-2.5 px-5'>
+			<div>
+				<div className="mb-10">
+					<h1 className="text-center text-xl font-bold text-primary">CACSA-UI</h1>
+				</div>
+				{routes.map((route => {
+					// Dark gray if the link's route is the current route 
+					const textColor = route.to === currentRoute ? 'text-gray-900': 'text-gray-400';
 
-				function handleClick() {
-					setCurrentRoute(route.to);
-					navigate(route.to);
-				}
+					function handleClick() {
+						setCurrentRoute(route.to);
+						navigate(route.to);
+					}
 
-				return (
-					<div 
-						className='flex items-center my-10 cursor-pointer' 
-						key={route.to}
-						onClick={handleClick}
-					>
-						<div className='mr-2.5'>
-							{route.icon}
-						</div>
-						<span 
-							className={`text-sm ${textColor}`} 
+					return (
+						<div 
+							className='flex items-center my-10 cursor-pointer' 
+							key={route.to}
+							onClick={handleClick}
 						>
-							{route.label}
-						</span>
-					</div>
-				)
-			}))}	
+							<div className='mr-2.5'>
+								{route.icon}
+							</div>
+							<span 
+								className={`text-sm ${textColor}`} 
+							>
+								{route.label}
+							</span>
+						</div>
+					)
+				}))}
+			</div>	
+			<Logout />
 		</div>
 	);
 };
