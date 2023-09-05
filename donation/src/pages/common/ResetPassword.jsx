@@ -16,7 +16,9 @@ export function ResetPassword () {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const token = searchParams.get('token');
-    const loginUrl = 'https://special-potato-44r79pp54x7255r7-5173.app.github.dev/'
+
+    const { host, port } = window.location;
+    const loginUrl = `https://${host}${port ? ':port': ''}/login`;
 
     async function handleSubmit (e) {
         e.preventDefault();
@@ -30,7 +32,7 @@ export function ResetPassword () {
                     password,
                     confirmPassword
                 }
-            }
+            }redirect
             
             try {
                 const response = await axios.request(options);

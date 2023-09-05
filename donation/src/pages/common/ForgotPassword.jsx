@@ -5,8 +5,8 @@ import axios from "axios";
 
 export function ForgotPassword () {
     const [email, setEmail] = useState('');
-    // Change this in production
-    const redirect = 'https://special-potato-44r79pp54x7255r7-5173.app.github.dev/reset'
+    const { host, port } = window.location;
+    const redirect = `https://${host}${port ? ':port': ''}/reset`;
 
     async function handleSubmit(e) {
         e.preventDefault();
