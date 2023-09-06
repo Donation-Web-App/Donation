@@ -4,9 +4,12 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-        "btn-color": "#0a4c2d",
-        "white": "#ffffff"
+        		"primary": "#02463e",
+        		"background": "#fafafa"
 			},
+			width: {
+				"formWidth": "550px"
+			}
 		},
 	},
 	plugins: [],

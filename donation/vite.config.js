@@ -5,4 +5,9 @@ import svgr from "vite-plugin-svgr";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [svgr(), react()],
+  server: {
+    proxy: {
+      '/api': 'https://donation-api-v2.onrender.com'
+    }
+  }
 });
