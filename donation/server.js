@@ -5,7 +5,7 @@ import url from 'url';
 
 /*
 Purpose of this server is to serve the frontend that is built into the dist folder
-It also proxies api requests to the backend
+It also proxies api requests to the backend 
 */
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
