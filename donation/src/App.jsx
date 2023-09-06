@@ -15,39 +15,39 @@ import {
 	ResetPassword,
 	ForgotPassword,
 } from "./pages";
+import { NavBar } from "./components";
+import { Route, Routes } from "react-router-dom";
 import "./index.css";
 
 function App() {
 	return (
-		<div>
-			<ApiBaseUrlContext.Provider value="https://donation-api-v2.onrender.com">
-				<Toaster position="top-center"/>
-				<BrowserRouter>
-					<Routes>
-						{/* Common routes*/}
-						<Route path='/' element={<Index/>} />
-						<Route path='signup' element={<SignUp />} />
-						<Route path='login' element={<Login />} />
-						<Route path='forgot' element={<ForgotPassword />} />
-						<Route path='reset' element={<ResetPassword/>} />
-
-						{/* Admin routes*/}
-						<Route path='admin' element={<Layout/>}>
-							<Route path='home' element={<AdminHome />}/>
-							<Route path='breakdown' element={<Breakdown />} />
-							<Route path='mydonations' element={<MyDonations />} />
-							<Route path='donations' element={<AdminDonations />} />
-						</Route>
-
-						{/* Donor routes */}
-						<Route path="donor" element={<Layout/>}>
-							<Route path="home" element={<DonorHome/>} />
-							<Route path='donations' element={<DonorDonations />} />
-						</Route>
-					</Routes>
-				</BrowserRouter>
-			</ApiBaseUrlContext.Provider>
-		</div>
+		<ApiBaseUrlContext.Provider value="https://donation-api-v2.onrender.com">
+			<Toaster position="top-center"/>
+			<BrowserRouter>
+				<Routes>
+					{/* Common routes*/}
+					<Route path='/' element={<Index/>} />
+					<Route path='signup' element={<SignUp />} />
+					<Route path='login' element={<Login />} />
+					<Route path='forgot' element={<ForgotPassword />} />
+					<Route path='reset' element={<ResetPassword/>} />
+	
+					{/* Admin routes*/}
+					<Route path='admin' element={<Layout/>}>
+						<Route path='home' element={<AdminHome />}/>
+						<Route path='breakdown' element={<Breakdown />} />
+						<Route path='mydonations' element={<MyDonations />} />
+						<Route path='donations' element={<AdminDonations />} />
+					</Route>
+	
+					{/* Donor routes */}
+					<Route path="donor" element={<Layout/>}>
+						<Route path="home" element={<DonorHome/>} />
+						<Route path='donations' element={<DonorDonations />} />
+					</Route>
+				</Routes>
+			</BrowserRouter>
+		</ApiBaseUrlContext.Provider>
 	);
 }
 
