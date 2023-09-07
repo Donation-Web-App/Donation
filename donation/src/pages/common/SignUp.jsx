@@ -22,8 +22,8 @@ export function SignUp() {
 				method: 'post',
 				url: '/api/v2/auth/signup',
 				data: {
-					firstName,
-					lastName,
+					firstname: firstName,
+					lastname: lastName,
 					email,
 					password,
 					confirmPassword
