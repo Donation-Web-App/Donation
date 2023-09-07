@@ -15,8 +15,6 @@ import {
 	ResetPassword,
 	ForgotPassword,
 } from "./pages";
-import { NavBar } from "./components";
-import { Route, Routes } from "react-router-dom";
 import "./index.css";
 
 function App() {
