@@ -50,7 +50,7 @@ export function Login() {
 
   return (
     <Page>
-      <form className="w-formWidth mx-auto" onSubmit={handleLogin}>
+      <form className="w-full max-w-narrowWidth mx-auto" onSubmit={handleLogin}>
         <h1 className="text-3xl text-center">
           Welcome to <span className="text-primary font-bold">CACSA-UI</span>
         </h1>
