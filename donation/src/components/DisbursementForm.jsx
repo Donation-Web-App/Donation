@@ -1,8 +1,7 @@
 import { recordDisbursement } from "../lib/api";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import { TextInput } from ".";
-import { SubmitInput } from ".";
+import { TextInput, SubmitInput, Form } from ".";
 
 export function DisbursementForm() {
   const [amount, setAmount] = useState(0);
@@ -25,16 +24,14 @@ export function DisbursementForm() {
   }
 
   return (
-    <form className="w-full max-w-narrowWidth mx-auto" onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <h2 className="text-xl text-center">Disbursed lately? How much?</h2>
-      <br />
       <TextInput
         placeholder="Enter amount"
         label="Amount Disbursed"
         onChange={(e) => setAmount(Number(e.target.value))}
       />
-      <br />
       <SubmitInput label="Record" />
-    </form>
+    </Form>
   );
 }
