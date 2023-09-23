@@ -3,21 +3,15 @@ import { NavBar } from ".";
 import { TitleBar } from ".";
 
 export function DesktopLayout() {
-  const navBarWidth = "200px";
-  const titleBarHeight = "50px";
   return (
     <div className="h-screen">
-      <div className={`fixed top-0 left-0 right-0 h-[${titleBarHeight}]`}>
+      <div className={`fixed top-0 left-0 right-0 h-[50px]`}>
         <TitleBar />
       </div>
-      <div
-        className={`fixed h-full top-[${titleBarHeight}] w-[${navBarWidth}]`}
-      >
+      <div className={`fixed h-full top-[50px] w-[200px]`}>
         <NavBar />
       </div>
-      <div
-        className={`pt-[${titleBarHeight}] pl-[${navBarWidth}] h-full w-full overflow-y-auto`}
-      >
+      <div className={`pt-[50px] pl-[200px] h-full w-full overflow-y-auto`}>
         <Outlet />
       </div>
     </div>
