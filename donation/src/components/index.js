@@ -20,3 +20,4 @@ export { WelcomeText } from "./WelcomeText";
 export { Logo } from "./Logo";
 export { MobileTitleBar } from "./MobileTitleBar";
 export { DesktopTitleBar } from "./DesktopTitleBar";
+export { Form } from "./Form";
