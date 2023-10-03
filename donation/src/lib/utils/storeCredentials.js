@@ -1,7 +1,7 @@
 export function storeCredentials(tokenValue, firstName, userRole) {
   // Token expires in 30 days
   // Setting 60 seconds to conservatively factor in latency
-  const tokenExpiration = Date.now() + 30 * 24 * 60 * 60 * 1000 - 60000;
+  const tokenExpiration = Date.now() + 24 * 60 * 60 * 1000 - 60000;
 
   // Store token and credentials
   window.localStorage.setItem("tokenValue", tokenValue);
