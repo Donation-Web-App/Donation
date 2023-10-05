@@ -23,7 +23,7 @@ export function BreakdownChart() {
 		responsive: true,
 		plugins: {
 			legend: {
-				display: false,
+				display: true,
 				position: "bottom"
 		  },
 		},
