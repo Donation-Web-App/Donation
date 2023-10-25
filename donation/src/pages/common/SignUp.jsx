@@ -53,7 +53,7 @@ export function SignUp() {
       >
         <h1 className="text-2xl text-center font-bold">
           Welcome to{" "}
-          <span className="text-btn-color text-primary">CACSA-UI</span>
+          <span className="text-btn-color text-primary">CACSA-UI Donation</span>
         </h1>
         <br />
         <TextInput
