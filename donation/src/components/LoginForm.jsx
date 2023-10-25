@@ -29,7 +29,7 @@ export function LoginForm() {
 	return (
 		<Form onSubmit={handleLogin}>
 			<h1 className='text-3xl text-center'>
-				Welcome to <span className='text-primary font-bold'>CACSA-UI</span>
+				Welcome to <span className='text-primary font-bold'>CACSA-UI Donation</span>
 			</h1>
 			<TextInput
 				type='email'
