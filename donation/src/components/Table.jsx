@@ -3,7 +3,7 @@
 // emptyState to be displayed when the rows variable is of length zero
 
 export function Table({ headings, data, emptyState }) {
-  const rows = data.map((row) => {
+  const tableBody = data.map((row) => {
     return (
       <tr>
         {row.map((cell) => (
@@ -15,19 +15,24 @@ export function Table({ headings, data, emptyState }) {
     );
   });
 
-  const headingElements = headings.map((heading) => (
-    <th className="py-2.5 border-solid border-gray-300 border text-center bg-gray-200">
-      {heading}
-    </th>
-  ));
+  const tableHeading = (
+    <tr className="py-2.5">
+      {headings.map((heading) => (
+        <th
+          key={heading}
+          className="py-2.5 border-solid border-gray-300 border text-center bg-gray-200"
+        >
+          {heading}
+        </th>
+      ))}
+    </tr>
+  );
 
-  if (rows.length) {
+  if (tableBody.length) {
     return (
       <table className="w-full max-w-narrowWidth m-auto mt-10">
-        <thead>
-          <tr className="py-2.5">{headingElements}</tr>
-        </thead>
-        <tbody>{rows}</tbody>
+        <thead>{tableHeading}</thead>
+        <tbody>{tableBody}</tbody>
       </table>
     );
   } else {
