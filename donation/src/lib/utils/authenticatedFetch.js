@@ -7,25 +7,25 @@ It adds an auth header and parses the data from the response
 */
 
 export async function authenticatedFetch(options) {
-    redirectIfNotLoggedIn();
+  redirectIfNotLoggedIn();
 
-    // Token is valid, so we may proceed with the request
-    const tokenValue = window.localStorage.getItem('tokenValue');
+  // Token is valid, so we may proceed with the request
+  const tokenValue = window.localStorage.getItem("tokenValue");
 
-    // Making sure options object has headers
-    if (!options.headers) {
-        options.headers = {}
-    }
+  // Making sure options object has headers
+  if (!options.headers) {
+    options.headers = {};
+  }
 
-    // Attaching the Authorization header with the token value
-    options.headers['Authorization'] = `Bearer ${tokenValue}`;
+  // Attaching the Authorization header with the token value
+  options.headers["Authorization"] = `Bearer ${tokenValue}`;
 
-    // Perform the request
-    const response = await axios.request(options);
+  // Perform the request
+  const response = await axios.request(options);
 
-    if (response.data.status == "success") {
-        return response.data;
-    } else {
-        throw "Something went wrong"
-    }
+  if (response.data.status == "success") {
+    return response.data;
+  } else {
+    throw "Something went wrong";
+  }
 }

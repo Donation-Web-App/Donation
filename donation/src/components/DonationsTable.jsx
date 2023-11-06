@@ -1,4 +1,4 @@
-import { getDonors, getDonations } from "../lib/api";
+import { getDonations, getDonors } from "../lib/api";
 import { formatDonations } from "../lib/utils";
 import { useEffect, useState } from "react";
 import { Table } from ".";
@@ -10,21 +10,12 @@ export function DonationsTable() {
 
   const emptyState = <div>Looks like you haven't recorded any donations.</div>;
 
-  // Function that gets donors and donations
-  async function getDonationsAndDonors() {
-    // TODO: Fetching data does not have to be sequential
-    const donations = await getDonations();
-    const donors = await getDonors();
-
-    return { donations, donors };
-  }
-
-  function populateData() {
-    getDonationsAndDonors()
-      .then((response) => {
-        console.log(response);
-        const rows = formatDonations(response);
-        setRows(rows);
+  function getData() {
+    Promise.all([getDonations(), getDonors()])
+      .then(([donations, donors]) => {
+        const rows = formatDonations({ donations, donors });
+        // Set the rows while they are reversed so that the data is ordered in reverse chronological order
+        setRows(rows.reverse());
         setLoading(false);
       })
       .catch((e) => {
@@ -33,14 +24,15 @@ export function DonationsTable() {
       });
   }
 
-  useEffect(populateData, []);
+  useEffect(getData, []);
 
   // If the data is still being loaded from the API
   if (loading) {
     return <div>Loading</div>;
+  }
 
-    // If there is an error
-  } else if (error) {
+  // If there is an error
+  else if (error) {
     return <div>Something went wrong</div>;
   }
 
