@@ -13,7 +13,7 @@ export function DisbursementForm() {
     if (amount) {
       confirmAlert({
         title: "Record Disbursement",
-        message: `Are you sure you want to record a disbursement of ${amount}?`,
+        message: `Are you sure you want to record a disbursement of NGN${amount}?`,
         buttons: [
           {
             label: "Record",

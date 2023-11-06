@@ -2,7 +2,7 @@ import { formatDate } from "../../lib/utils";
 
 export function formatDonations({ donations, donors }) {
   // Creating an array of formatted donations
-  const rows = [];
+  const formattedDonations = [];
 
   // Creating a hash map of donor ids to donor names
   const donorsHashMap = {};
@@ -12,7 +12,7 @@ export function formatDonations({ donations, donors }) {
 
   // Loop through each donations formatting it
   for (const donation of donations) {
-    // Creating a row for that donation
+    // Creating a formattedDonation for that donation
     const formattedDonation = [
       formatDate(donation.date),
       donation.userId
@@ -21,9 +21,9 @@ export function formatDonations({ donations, donors }) {
       donation.amount,
     ];
 
-    // Adding the row to list of rows
-    rows.push(formattedDonation);
+    // Adding the formattedDonation to list of formattedDonations
+    formattedDonations.push(formattedDonation);
   }
 
-  return rows;
+  return formattedDonations;
 }
