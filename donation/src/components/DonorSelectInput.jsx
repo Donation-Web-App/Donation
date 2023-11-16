@@ -2,20 +2,19 @@ import { useState, useEffect } from "react";
 import { getDonors } from "../lib/api";
 import Select from "react-select";
 
-export function DonorSelectInput({ onChange, value }) {
+export function DonorSelectInput({ onChange, selectedDonor }) {
   const [donors, setDonors] = useState([]);
   const [error, setError] = useState(false);
 
   function populateDonors() {
     getDonors()
       .then((donors) => {
-        setDonors([
-          { value: "", label: "" },
-          ...donors.map(({ _id, firstname, lastname }) => ({
+        setDonors(
+          donors.map(({ _id, firstname, lastname }) => ({
             value: _id,
             label: `${firstname} ${lastname}`,
-          })),
-        ]);
+          }))
+        );
       })
       .catch((error) => {
         console.log(error);
@@ -31,7 +30,7 @@ export function DonorSelectInput({ onChange, value }) {
     return (
       <div>
         <label className="text-sm">Donor</label>
-        <Select options={donors} onChange={onChange} />
+        <Select options={donors} onChange={onChange} value={selectedDonor} />
       </div>
     );
   }
