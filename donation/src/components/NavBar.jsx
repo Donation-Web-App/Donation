@@ -1,8 +1,7 @@
-import { HomeI, DonateI, Activity, HistoryI, Like } from "../assets";
+import { HomeI, Activity, Donations, MyDonations } from "../assets";
 import { DesktopNavBar, MobileNavBar } from ".";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Logout } from ".";
 import { isMobile } from "../lib/utils";
 
 export function NavBar() {
@@ -13,13 +12,13 @@ export function NavBar() {
   const adminRoutes = [
     { icon: <HomeI />, to: "/admin/home", label: "Home" },
     { icon: <Activity />, to: "/admin/breakdown", label: "Breakdown" },
-    { icon: <Like />, to: "/admin/donations", label: "Donations" },
-    { icon: <Like />, to: "/admin/mydonations", label: "My Donations" },
+    { icon: <Donations />, to: "/admin/donations", label: "Donations" },
+    { icon: <MyDonations />, to: "/admin/mydonations", label: "My Donations" },
   ];
 
   const donorRoutes = [
     { icon: <HomeI />, to: "/donor/home", label: "Home" },
-    { icon: <Like />, to: "/donor/donations", label: "Donations" },
+    { icon: <MyDonations />, to: "/donor/donations", label: "My Donations" },
   ];
 
   // Choose the appropriate routes to display based on a user's role

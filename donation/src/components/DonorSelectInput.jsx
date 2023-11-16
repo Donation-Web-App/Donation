@@ -10,7 +10,7 @@ export function DonorSelectInput({ onChange, value }) {
     getDonors()
       .then((donors) => {
         setDonors([
-          { value: "", label: "" },
+          { value: " ", label: " " },
           ...donors.map(({ _id, firstname, lastname }) => ({
             value: _id,
             label: `${firstname} ${lastname}`,
