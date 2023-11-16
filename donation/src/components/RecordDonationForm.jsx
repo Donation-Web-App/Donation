@@ -10,8 +10,10 @@ export function RecordDonationForm() {
   const [donorId, setDonorId] = useState("");
   const [date, setDate] = useState("");
   const [donorName, setDonorName] = useState("");
+  const [formActive, setFormActive] = useState(true);
 
   async function handleSubmit(e) {
+    if (!formActive) return;
     e.preventDefault();
     if (donorId && amount) {
       confirmAlert({
@@ -21,6 +23,7 @@ export function RecordDonationForm() {
           {
             label: "Record Donation",
             onClick: async () => {
+              setFormActive(false);
               toast("Recording donation...");
               try {
                 const response = await recordDonation(donorId, amount, date);
@@ -32,6 +35,7 @@ export function RecordDonationForm() {
                 setDonorId("");
                 setDonorName("");
                 setDate("");
+                setFormActive(true);
               }
             },
           },
@@ -48,6 +52,7 @@ export function RecordDonationForm() {
   return (
     <Form onSubmit={handleSubmit}>
       <DonorSelectInput
+        value={donorId}
         onChange={({ value, label }) => {
           setDonorId(value);
           setDonorName(label);
@@ -67,7 +72,7 @@ export function RecordDonationForm() {
         onChange={(e) => setDate(e.target.value)}
         value={date}
       />
-      <SubmitInput label="Record donation" />
+      <SubmitInput label="Record donation" active={formActive} />
     </Form>
   );
 }

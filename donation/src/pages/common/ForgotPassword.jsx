@@ -5,28 +5,33 @@ import axios from "axios";
 
 export function ForgotPassword() {
   const [email, setEmail] = useState("");
-  const { host, port } = window.location;
-  const redirect = `https://${host}${port ? ":port" : ""}/reset`;
+  const [formActive, setFormActive] = useState(true);
+
+  const redirect = `https://${window.location.host}/reset`;
 
   async function handleSubmit(e) {
+    if (!formActive) return;
+
     e.preventDefault();
 
     if (email) {
-      const options = {
-        method: "patch",
-        url: "/api/v2/auth/forgotPassword",
-        data: {
-          email,
-          redirect,
-        },
-      };
+      try {
+        const options = {
+          method: "patch",
+          url: "/api/v2/auth/forgotPassword",
+          data: {
+            email,
+            redirect,
+          },
+        };
+        setFormActive(false);
+        const response = await axios.request(options);
 
-      const response = await axios.request(options);
-
-      if (response.data.status == "success") {
         toast("Reset link will be sent to your email shortly.");
         setEmail("");
-      } else {
+
+        setFormActive(true);
+      } catch (e) {
         toast("Something went wrong trying to reset your password");
       }
     } else {
@@ -52,7 +57,7 @@ export function ForgotPassword() {
           value={email}
         />
         <br />
-        <SubmitInput />
+        <SubmitInput label="Reset Password" active={formActive} />
       </form>
     </Page>
   );
