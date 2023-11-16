@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Form, TextInput, SubmitInput } from ".";
 import { login } from "../lib/api";
-import { storeCredentials } from "../lib/utils";
+import { formatDate, storeCredentials } from "../lib/utils";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -9,23 +9,27 @@ export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [formActive, setFormActive] = useState(true);
   const navigate = useNavigate();
 
   async function handleLogin(e) {
+    if (!formActive) return;
+
     toast("Logging you in...");
     e.preventDefault();
 
     try {
+      setFormActive(false);
       const { token, firstname, role } = await login(email, password);
       storeCredentials(token, firstname, role);
 
       // Redirect the user based on their role
       navigate(role == "admin" ? "/admin/home" : "/donor/home");
     } catch (error) {
+      setFormActive(true);
       toast(
         "Couldn't log you in. Please check your details and connection and try again."
       );
-      console.log(error);
     }
   }
 
@@ -64,7 +68,7 @@ export function LoginForm() {
         <Link to="/forgot">Forgot Password?</Link>
       </div>
       <br />
-      <SubmitInput label="Login" />
+      <SubmitInput label="Login" active={formActive} />
       <p className="text-center mt-5">
         Don't have an account?
         <Link to="/signup"> Sign Up </Link>

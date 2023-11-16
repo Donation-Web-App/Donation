@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Page, TextInput, SubmitInput } from "../../components";
+import { phone } from "phone";
 import toast from "react-hot-toast";
 import axios from "axios";
 
@@ -11,36 +12,57 @@ export function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [formActive, setFormActive] = useState(true);
 
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
-    if (firstName && lastName && email && password && confirmPassword) {
-      e.preventDefault();
+    e.preventDefault();
 
-      const options = {
-        method: "post",
-        url: "/api/v2/auth/signup",
-        data: {
-          firstname: firstName,
-          lastname: lastName,
-          email,
-          password,
-          confirmPassword,
-        },
-      };
+    // If the form is not active, we do nothing
+    if (!formActive) return;
 
-      try {
-        const response = await axios.request(options);
+    if (
+      firstName &&
+      lastName &&
+      email &&
+      password &&
+      confirmPassword &&
+      phoneNumber
+    ) {
+      if (phone(phoneNumber).isValid) {
+        const options = {
+          method: "post",
+          url: "/api/v2/auth/signup",
+          data: {
+            firstname: firstName,
+            lastname: lastName,
+            email,
+            password,
+            confirmPassword,
+            phoneNumber,
+          },
+        };
 
-        if (response.data.status == "success") {
-          toast("Account created successfully.");
-          navigate("/login");
-        } else {
-          toast("Something went wrong");
+        try {
+          setFormActive(false);
+          const response = await axios.request(options);
+
+          if (response.data.status == "success") {
+            toast("Account created successfully.");
+            navigate("/login");
+          } else {
+            toast("Something went wrong");
+          }
+        } catch (error) {
+          setFormActive(true);
+          toast(error.response.data.message);
         }
-      } catch (error) {
-        toast(error.response.data.message);
+      } else {
+        toast(
+          "Your phone number is invalid. Please re-enter it with the plus sign and International Code"
+        );
       }
     }
   }
@@ -81,6 +103,14 @@ export function SignUp() {
         />
         <br />
         <TextInput
+          type="tel"
+          label="WhatsApp Phone Number"
+          placeholder="+12124567890"
+          onChange={(e) => setPhoneNumber(e.target.value)}
+          value={phoneNumber}
+        />
+        <br />
+        <TextInput
           type="password"
           label="Password"
           placeholder="Enter a password"
@@ -96,7 +126,7 @@ export function SignUp() {
           value={confirmPassword}
         />
         <br />
-        <SubmitInput label="Create an account" />
+        <SubmitInput label="Create an account" active={formActive} />
         <br />
         <p className="text-center">
           Have an account?

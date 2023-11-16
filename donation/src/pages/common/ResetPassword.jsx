@@ -11,17 +11,20 @@ export function ResetPassword() {
 
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  const [formActive, setFormActive] = useState(true);
+
   const token = searchParams.get("token");
 
-  const { host, port } = window.location;
-  const loginUrl = `https://${host}${port ? ":port" : ""}/login`;
+  const loginUrl = `https://${window.location.host}/login`;
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (!formActive) return;
+
     if (password == confirmPassword) {
       const options = {
         method: "patch",
@@ -35,6 +38,7 @@ export function ResetPassword() {
       };
 
       try {
+        setFormActive(false);
         const response = await axios.request(options);
         toast(response.data.message);
         setSearchParams({});
@@ -42,6 +46,8 @@ export function ResetPassword() {
       } catch (e) {
         console.log(e);
         toast(e.response.data.message);
+      } finally {
+        setFormActive(true);
       }
     } else {
       toast("Passwords must match");
@@ -75,7 +81,7 @@ export function ResetPassword() {
           }}
         />
         <br />
-        <SubmitInput label="Reset Password" />
+        <SubmitInput label="Reset Password" active={formActive} />
       </form>
     </Page>
   );

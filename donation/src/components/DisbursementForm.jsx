@@ -7,9 +7,13 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 
 export function DisbursementForm() {
   const [amount, setAmount] = useState(0);
+  const [formActive, setFormActive] = useState(true);
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (!formActive) return;
+
     if (amount) {
       confirmAlert({
         title: "Record Disbursement",
@@ -18,6 +22,7 @@ export function DisbursementForm() {
           {
             label: "Record",
             onClick: async () => {
+              setFormActive(false);
               toast("Recording disbursement...");
               try {
                 const response = await recordDisbursement(amount);
@@ -25,6 +30,8 @@ export function DisbursementForm() {
               } catch (error) {
                 console.log(error);
                 toast("Something went wrong.");
+              } finally {
+                setFormActive(true);
               }
             },
           },
@@ -48,7 +55,7 @@ export function DisbursementForm() {
         label="Amount Disbursed"
         onChange={(e) => setAmount(Number(e.target.value))}
       />
-      <SubmitInput label="Record" />
+      <SubmitInput label="Record" active={formActive} />
     </Form>
   );
 }
