@@ -6,5 +6,5 @@ export function Page({ children, requiresLogin }) {
     redirectIfNotLoggedIn();
   }
 
-  return <div className={`h-full w-full p-2.5`}>{children}</div>;
+  return <div className={`h-screen w-full p-2.5`}>{children}</div>;
 }

@@ -46,66 +46,68 @@ export function SignUp() {
   }
 
   return (
-    <Page>
-      <form
-        className="w-full max-w-narrowWidth mx-auto"
-        onSubmit={handleSubmit}
-      >
-        <h1 className="text-2xl text-center font-bold">
-          Welcome to{" "}
-          <span className="text-btn-color text-primary">CACSA-UI Donation</span>
-        </h1>
-        <br />
-        <TextInput
-          type="text"
-          label="First Name:"
-          placeholder="Enter your first name"
-          onChange={(e) => setFirstName(e.target.value)}
-          value={firstName}
-        />
-        <br />
-        <TextInput
-          type="text"
-          label="Last Name:"
-          placeholder="Enter your last name"
-          onChange={(e) => setLastName(e.target.value)}
-          value={lastName}
-        />
-        <br />
-        <TextInput
-          type="email"
-          label="Email"
-          placeholder="Enter your email"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-        />
-        <br />
-        <TextInput
-          type="password"
-          label="Password"
-          placeholder="Enter a password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-        />
-        <br />
-        <TextInput
-          type="password"
-          label="Confirm password"
-          placeholder="Confirm your password"
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          value={confirmPassword}
-        />
-        <br />
-        <SubmitInput label="Create an account" />
-        <br />
-        <p className="text-center">
-          Have an account?
-          <Link className="text-primary" to="/login">
-            {" "}
-            Log In{" "}
-          </Link>
-        </p>
-      </form>
-    </Page>
-  );
+		<Page>
+			<div className='h-screen w-full flex items-center justify-center'>
+        <form
+          className='w-full max-w-narrowWidth mx-auto'
+          onSubmit={handleSubmit}
+        >
+				<h1 className='text-2xl text-center font-bold'>
+					Welcome to{" "}
+					<span className='text-btn-color text-primary'>CACSA-UI Donation</span>
+				</h1>
+				<br />
+				<TextInput
+					type='text'
+					label='First Name:'
+					placeholder='Enter your first name'
+					onChange={(e) => setFirstName(e.target.value)}
+					value={firstName}
+				/>
+				<br />
+				<TextInput
+					type='text'
+					label='Last Name:'
+					placeholder='Enter your last name'
+					onChange={(e) => setLastName(e.target.value)}
+					value={lastName}
+				/>
+				<br />
+				<TextInput
+					type='email'
+					label='Email'
+					placeholder='Enter your email'
+					onChange={(e) => setEmail(e.target.value)}
+					value={email}
+				/>
+				<br />
+				<TextInput
+					type='password'
+					label='Password'
+					placeholder='Enter a password'
+					onChange={(e) => setPassword(e.target.value)}
+					value={password}
+				/>
+				<br />
+				<TextInput
+					type='password'
+					label='Confirm password'
+					placeholder='Confirm your password'
+					onChange={(e) => setConfirmPassword(e.target.value)}
+					value={confirmPassword}
+				/>
+				<br />
+				<SubmitInput label='Create an account' />
+				<br />
+				<p className='text-center'>
+					Have an account?
+					<Link className='text-primary' to='/login'>
+						{" "}
+						Log In{" "}
+					</Link>
+				</p>
+			</form>
+			</div>
+		</Page>
+	);
 }
