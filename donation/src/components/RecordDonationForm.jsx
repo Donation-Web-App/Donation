@@ -7,18 +7,17 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 
 export function RecordDonationForm() {
   const [amount, setAmount] = useState(0);
-  const [donorId, setDonorId] = useState("");
   const [date, setDate] = useState("");
-  const [donorName, setDonorName] = useState("");
+  const [donor, setDonor] = useState(null);
   const [formActive, setFormActive] = useState(true);
 
   async function handleSubmit(e) {
     if (!formActive) return;
     e.preventDefault();
-    if (donorId && amount) {
+    if (donor && donor.label && amount) {
       confirmAlert({
         title: "Record Donation",
-        message: `Are you sure you want to record a donation by ${donorName} for NGN${amount}?`,
+        message: `Are you sure you want to record a donation by ${donor.label} for NGN${amount}?`,
         buttons: [
           {
             label: "Record Donation",
@@ -26,14 +25,17 @@ export function RecordDonationForm() {
               setFormActive(false);
               toast("Recording donation...");
               try {
-                const response = await recordDonation(donorId, amount, date);
+                const response = await recordDonation(
+                  donor.value,
+                  amount,
+                  date
+                );
                 toast(response.message);
               } catch (e) {
                 toast(e.response.data.message);
               } finally {
                 setAmount(0);
-                setDonorId("");
-                setDonorName("");
+                setDonor(null);
                 setDate("");
                 setFormActive(true);
               }
@@ -52,10 +54,9 @@ export function RecordDonationForm() {
   return (
     <Form onSubmit={handleSubmit}>
       <DonorSelectInput
-        value={donorId}
-        onChange={({ value, label }) => {
-          setDonorId(value);
-          setDonorName(label);
+        selectedDonor={donor}
+        onChange={(selectedDonor) => {
+          setDonor(selectedDonor);
         }}
       />
       <TextInput
