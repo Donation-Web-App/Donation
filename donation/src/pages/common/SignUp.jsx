@@ -69,6 +69,7 @@ export function SignUp() {
 
   return (
     <Page>
+      <div className="h-screen w-full flex items-center justify-center">
       <form
         className="w-full max-w-narrowWidth mx-auto"
         onSubmit={handleSubmit}
@@ -136,6 +137,7 @@ export function SignUp() {
           </Link>
         </p>
       </form>
+      </div>
     </Page>
   );
 }
