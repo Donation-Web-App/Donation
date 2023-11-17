@@ -2,6 +2,7 @@ import { getDonations, getDonors } from "../lib/api";
 import { formatDonations } from "../lib/utils";
 import { useEffect, useState } from "react";
 import { Table } from ".";
+import CurrencyFormat from "react-currency-format";
 
 export function DonationsTable() {
   const [loading, setLoading] = useState(true);
@@ -15,7 +16,20 @@ export function DonationsTable() {
       .then(([donations, donors]) => {
         const rows = formatDonations({ donations, donors });
         // Set the rows while they are reversed so that the data is ordered in reverse chronological order
-        setRows(rows.reverse());
+        setRows(
+          rows.reverse().map((row) => {
+            const amount = row.pop();
+            return [
+              ...row,
+              <CurrencyFormat
+                value={amount}
+                displayType="text"
+                prefix=""
+                thousandSeparator={true}
+              />,
+            ];
+          })
+        );
         setLoading(false);
       })
       .catch((e) => {
@@ -40,7 +54,7 @@ export function DonationsTable() {
   else {
     return (
       <Table
-        headings={["Date", "Donor", "Amount"]}
+        headings={["Date", "Donor", "Amount (NGN)"]}
         data={rows}
         emptyState={emptyState}
       />

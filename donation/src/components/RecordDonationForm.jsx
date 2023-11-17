@@ -1,4 +1,10 @@
-import { DonorSelectInput, SubmitInput, TextInput, Form } from ".";
+import {
+  DonorSelectInput,
+  SubmitInput,
+  TextInput,
+  Form,
+  CurrencyInput,
+} from ".";
 import { recordDonation } from "../lib/api";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
@@ -7,6 +13,7 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 
 export function RecordDonationForm() {
   const [amount, setAmount] = useState(0);
+  const [formattedAmount, setFormattedAmount] = useState("");
   const [date, setDate] = useState("");
   const [donor, setDonor] = useState(null);
   const [formActive, setFormActive] = useState(true);
@@ -17,7 +24,7 @@ export function RecordDonationForm() {
     if (donor && donor.label && amount) {
       confirmAlert({
         title: "Record Donation",
-        message: `Are you sure you want to record a donation by ${donor.label} for NGN${amount}?`,
+        message: `Are you sure you want to record a donation by ${donor.label} for ${formattedAmount}?`,
         buttons: [
           {
             label: "Record Donation",
@@ -35,6 +42,7 @@ export function RecordDonationForm() {
                 toast(e.response.data.message);
               } finally {
                 setAmount(0);
+                setFormattedAmount("");
                 setDonor(null);
                 setDate("");
                 setFormActive(true);
@@ -59,12 +67,13 @@ export function RecordDonationForm() {
           setDonor(selectedDonor);
         }}
       />
-      <TextInput
-        label="Amount"
-        placeholder="Enter the donated amount"
-        type="number"
-        onChange={(e) => setAmount(e.target.value)}
+      <CurrencyInput
+        label="Amount Donated"
         value={amount}
+        onValueChange={({ value, formattedValue }) => {
+          setAmount(value);
+          setFormattedAmount(formattedValue);
+        }}
       />
       <TextInput
         label="Date (optional)"

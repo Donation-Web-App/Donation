@@ -21,3 +21,4 @@ export { Logo } from "./Logo";
 export { MobileTitleBar } from "./MobileTitleBar";
 export { DesktopTitleBar } from "./DesktopTitleBar";
 export { Form } from "./Form";
+export { CurrencyInput } from "./CurrencyInput";
