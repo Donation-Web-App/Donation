@@ -2,12 +2,13 @@ import { recordDisbursement } from "../lib/api";
 import { confirmAlert } from "react-confirm-alert";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import { TextInput, SubmitInput, Form } from ".";
+import { CurrencyInput, SubmitInput, Form } from ".";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
 export function DisbursementForm() {
   const [amount, setAmount] = useState(0);
   const [formActive, setFormActive] = useState(true);
+  const [formattedAmount, setFormattedAmount] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -17,7 +18,7 @@ export function DisbursementForm() {
     if (amount) {
       confirmAlert({
         title: "Record Disbursement",
-        message: `Are you sure you want to record a disbursement of NGN${amount}?`,
+        message: `Are you sure you want to record a disbursement of ${formattedAmount}?`,
         buttons: [
           {
             label: "Record",
@@ -49,11 +50,13 @@ export function DisbursementForm() {
   return (
     <Form onSubmit={handleSubmit}>
       <h2 className="text-xl text-center">Disbursed lately? How much?</h2>
-      <TextInput
-        value={amount}
-        placeholder="Enter amount"
+      <CurrencyInput
         label="Amount Disbursed"
-        onChange={(e) => setAmount(Number(e.target.value))}
+        value={amount}
+        onValueChange={({ value, formattedValue }) => {
+          setAmount(value);
+          setFormattedAmount(formattedValue);
+        }}
       />
       <SubmitInput label="Record" active={formActive} />
     </Form>

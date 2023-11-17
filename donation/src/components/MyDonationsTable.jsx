@@ -1,3 +1,4 @@
+import CurrencyFormat from "react-currency-format";
 import { getMyDonations } from "../lib/api";
 import { useState, useEffect } from "react";
 import { formatDate } from "../lib/utils";
@@ -18,7 +19,12 @@ export function MyDonationsTable() {
         for (const donation of myDonations) {
           const row = [
             donation.date ? formatDate(donation.date) : "",
-            donation.amount,
+            <CurrencyFormat
+              value={donation.amount}
+              displayType="text"
+              prefix=""
+              thousandSeparator={true}
+            />,
           ];
 
           rows.push(row);
@@ -50,7 +56,7 @@ export function MyDonationsTable() {
     return (
       <Table
         data={rows}
-        headings={["Date", "Amount"]}
+        headings={["Date", "Amount (NGN )"]}
         emptyState={emptyState}
       />
     );
